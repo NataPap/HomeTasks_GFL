@@ -10,6 +10,10 @@ public class Interview extends TypeOfBroadcast {
         this.interviewer = interviewer;
     }
 
+    public Interview(int duration, String name) {
+        super(duration, name);
+    }
+
     @Override
     public double cost() {
         return price * duration;

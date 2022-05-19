@@ -2,7 +2,7 @@ package typeOfBroadcast;
 
 import radioStation.Broadcast;
 
-public abstract class TypeOfBroadcast {
+public abstract class TypeOfBroadcast implements WorkWithTypeOfBroadcast{
     public int duration;
     public String name;
 
@@ -13,16 +13,6 @@ public abstract class TypeOfBroadcast {
 
     public abstract double cost();
     public abstract String toString();
-
-    public void add(TypeOfBroadcast typeOfBroadcast, Broadcast broadcast) {
-        boolean b = typeOfBroadcast.duration + broadcast.getDuration() <= broadcast.getMaxDuration();
-        if(!b){
-            System.out.println("Adding is not possible due to exceeding the maximum broadcast time!");
-        }
-        else {
-            typeOfBroadcast.duration +=broadcast.getDuration();
-        }
-    }
 
     public int getDuration() {
         return duration;
@@ -38,5 +28,21 @@ public abstract class TypeOfBroadcast {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+
+    @Override
+    public Song createSong(TypeOfBroadcast typeOfBroadcast, Broadcast broadcast) {
+        return new Song(typeOfBroadcast.duration, typeOfBroadcast.name);
+    }
+
+    @Override
+    public Advertising createAdvertising(TypeOfBroadcast typeOfBroadcast, Broadcast broadcast) {
+        return new Advertising(typeOfBroadcast.duration, typeOfBroadcast.name);
+    }
+
+    @Override
+    public Interview createInterview(TypeOfBroadcast typeOfBroadcast, Broadcast broadcast) {
+        return new Interview(typeOfBroadcast.duration, typeOfBroadcast.name);
     }
 }

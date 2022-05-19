@@ -2,13 +2,15 @@ package radioStation;
 
 import typeOfBroadcast.TypeOfBroadcast;
 
-import java.io.Serializable;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Queue;
 
-public abstract class Broadcast {
+public abstract class Broadcast implements RadioStation {
 
-    int duration=0;
+    int duration = 0;
+    private int maxDuration;
+    private Queue<TypeOfBroadcast> queue=new LinkedList<>();
 
     public int getDuration() {
         return duration;
@@ -18,8 +20,6 @@ public abstract class Broadcast {
         this.duration = duration;
     }
 
-    private int maxDuration;
-
     public int getMaxDuration() {
         return maxDuration;
     }
@@ -27,8 +27,6 @@ public abstract class Broadcast {
     public void setMaxDuration(int maxDuration) {
         this.maxDuration = maxDuration;
     }
-
-    private Queue<TypeOfBroadcast> queue;
 
     public Queue<TypeOfBroadcast> getQueue() {
         return queue;
@@ -38,24 +36,39 @@ public abstract class Broadcast {
         this.queue = queue;
     }
 
-    public Broadcast( int maxDuration, Queue<TypeOfBroadcast> queue) {
+    public Broadcast(int maxDuration){
+        this.maxDuration=maxDuration;
+    }
+
+    public Broadcast(int maxDuration, Queue<TypeOfBroadcast> queue) {
         this.maxDuration = maxDuration;
         this.queue = queue;
     }
 
-    public abstract int totalDuration(int duration);
+    @Override
+    public Broadcast createBroadcast(int maxDuration) {
 
-    public void PrintQueue() {
-        for (Iterator<TypeOfBroadcast> iterator = queue.iterator(); iterator.hasNext(); ) {
-            TypeOfBroadcast next = iterator.next();
-            System.out.print(next + " ");
-        }
-        System.out.println();
-        while (!queue.isEmpty()) {
-            System.out.print(queue.poll() + " ");
-        }
-        System.out.println();
+        return new FirstBroadcast(maxDuration);
     }
 
 
+
+    @Override
+    public void printQueue() {
+        for (Iterator<TypeOfBroadcast> iterator = queue.iterator(); iterator.hasNext(); ) {
+            TypeOfBroadcast next = iterator.next();
+        }
+        System.out.println();
+        while (!queue.isEmpty()) {
+            System.out.print(getQueue().poll() + "\n");
+        }
+    }
+
+    @Override
+    public void updateBroadcast(int duration, Queue<TypeOfBroadcast> queue) {
+         setQueue(queue);
+         setDuration(duration);
+    }
+
 }
+
