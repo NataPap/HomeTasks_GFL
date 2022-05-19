@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.Iterator;
 import java.util.Queue;
 
-public abstract class Broadcast implements Serializable {
+public abstract class Broadcast {
 
     int duration=0;
 

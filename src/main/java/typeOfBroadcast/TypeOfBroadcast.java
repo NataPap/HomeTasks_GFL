@@ -1,5 +1,7 @@
 package typeOfBroadcast;
 
+import radioStation.Broadcast;
+
 public abstract class TypeOfBroadcast {
     public int duration;
     public String name;
@@ -11,6 +13,16 @@ public abstract class TypeOfBroadcast {
 
     public abstract double cost();
     public abstract String toString();
+
+    public void add(TypeOfBroadcast typeOfBroadcast, Broadcast broadcast) {
+        boolean b = typeOfBroadcast.duration + broadcast.getDuration() <= broadcast.getMaxDuration();
+        if(!b){
+            System.out.println("Adding is not possible due to exceeding the maximum broadcast time!");
+        }
+        else {
+            typeOfBroadcast.duration +=broadcast.getDuration();
+        }
+    }
 
     public int getDuration() {
         return duration;
