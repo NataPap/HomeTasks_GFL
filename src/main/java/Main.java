@@ -1,3 +1,6 @@
+import announcers.Announcer;
+import announcers.AnnouncerProxi;
+import announcers.Performance;
 import radioStation.Broadcast;
 import radioStation.FirstBroadcast;
 import radioStation.RadioStation;
@@ -29,6 +32,15 @@ public class Main {
         Song secondSong=new Song(5,"You'll See","Madonna");
         radioStation.addTypeOfBroadcast(secondSong);
         radioStation.printQueue();
+
+        Queue<TypeOfBroadcast> queue = new LinkedList<>();
+        queue.add(secondSong);
+        queue.add(firstAdvertising);
+        queue.add(firstInterview);
+        Performance performance=new Announcer("Skovoroda Den",5,queue);
+        performance.perfomanceOfAnnouncer();
+        Performance performance1=new AnnouncerProxi("Pupkin David","Two years worked in PanoramasStreet",queue);
+        performance1.perfomanceOfAnnouncer();
 
     }
 }
