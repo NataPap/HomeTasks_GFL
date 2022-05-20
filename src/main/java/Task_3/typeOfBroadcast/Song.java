@@ -1,6 +1,4 @@
-package typeOfBroadcast;
-
-import radioStation.Broadcast;
+package Task_3.typeOfBroadcast;
 
 public class Song extends TypeOfBroadcast  {
     private String singer;

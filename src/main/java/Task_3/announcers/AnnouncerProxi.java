@@ -1,6 +1,6 @@
-package announcers;
+package Task_3.announcers;
 
-import typeOfBroadcast.TypeOfBroadcast;
+import Task_3.typeOfBroadcast.TypeOfBroadcast;
 
 import java.util.Queue;
 
@@ -17,8 +17,8 @@ public class AnnouncerProxi implements Performance{
     }
 
     @Override
-    public String perfomanceOfAnnouncer() {
-        return "Hello, we are starting the broadcast.";
+    public void perfomanceOfAnnouncer() {
+        System.out.println("Hello, we are starting the broadcast.");
     }
 
     public String getName() {

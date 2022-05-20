@@ -1,6 +1,6 @@
-package typeOfBroadcast;
+package Task_3.typeOfBroadcast;
 
-import radioStation.Broadcast;
+import Task_3.radioStation.Broadcast;
 
 public abstract class TypeOfBroadcast implements WorkWithTypeOfBroadcast{
     public int duration;

@@ -1,6 +1,6 @@
-package radioStation;
+package Task_3.radioStation;
 
-import typeOfBroadcast.TypeOfBroadcast;
+import Task_3.typeOfBroadcast.TypeOfBroadcast;
 
 import java.util.Iterator;
 import java.util.LinkedList;

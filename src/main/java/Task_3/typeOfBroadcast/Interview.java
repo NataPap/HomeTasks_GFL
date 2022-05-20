@@ -1,4 +1,4 @@
-package typeOfBroadcast;
+package Task_3.typeOfBroadcast;
 
 public class Interview extends TypeOfBroadcast {
     private String interviewer;

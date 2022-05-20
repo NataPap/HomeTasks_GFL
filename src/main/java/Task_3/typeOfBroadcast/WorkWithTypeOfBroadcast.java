@@ -1,6 +1,6 @@
-package typeOfBroadcast;
+package Task_3.typeOfBroadcast;
 
-import radioStation.Broadcast;
+import Task_3.radioStation.Broadcast;
 
 public interface WorkWithTypeOfBroadcast {
     Song createSong (TypeOfBroadcast typeOfBroadcast, Broadcast broadcast);

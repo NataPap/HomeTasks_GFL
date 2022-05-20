@@ -1,4 +1,4 @@
-package typeOfBroadcast;
+package Task_3.typeOfBroadcast;
 
 public class Advertising extends TypeOfBroadcast {
     private final double price=5;
