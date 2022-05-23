@@ -1,6 +1,6 @@
-package Task_3.announcers;
+package task_3.announcers;
 
-import Task_3.typeOfBroadcast.TypeOfBroadcast;
+import task_3.typeOfBroadcast.TypeOfBroadcast;
 import java.util.Queue;
 
 public class Announcer implements Performance {

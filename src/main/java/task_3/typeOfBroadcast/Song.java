@@ -1,4 +1,4 @@
-package Task_3.typeOfBroadcast;
+package task_3.typeOfBroadcast;
 
 public class Song extends TypeOfBroadcast  {
     private String singer;

@@ -1,14 +1,14 @@
-package Task_3;
+package task_3;
 
-import Task_3.announcers.Announcer;
-import Task_3.announcers.AnnouncerProxi;
-import Task_3.announcers.Performance;
-import Task_3.radioStation.FirstBroadcast;
-import Task_3.radioStation.RadioStation;
-import Task_3.typeOfBroadcast.Advertising;
-import Task_3.typeOfBroadcast.Interview;
-import Task_3.typeOfBroadcast.Song;
-import Task_3.typeOfBroadcast.TypeOfBroadcast;
+import task_3.announcers.Announcer;
+import task_3.announcers.AnnouncerProxi;
+import task_3.announcers.Performance;
+import task_3.radioStation.FirstBroadcast;
+import task_3.radioStation.RadioStation;
+import task_3.typeOfBroadcast.Advertising;
+import task_3.typeOfBroadcast.Interview;
+import task_3.typeOfBroadcast.Song;
+import task_3.typeOfBroadcast.TypeOfBroadcast;
 
 import java.util.LinkedList;
 import java.util.Queue;

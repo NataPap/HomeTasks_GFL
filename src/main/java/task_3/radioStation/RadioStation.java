@@ -1,6 +1,6 @@
-package Task_3.radioStation;
+package task_3.radioStation;
 
-import Task_3.typeOfBroadcast.TypeOfBroadcast;
+import task_3.typeOfBroadcast.TypeOfBroadcast;
 
 import java.util.Queue;
 
