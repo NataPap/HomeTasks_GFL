@@ -100,6 +100,25 @@ public class WorkWithCollections {
         }
 
 //        6. Задать два стека, поменять информацию местами.
+        System.out.println("\nTask 6:\n");
+        ArrayList<String> listStr1 = new ArrayList<>();
+        listStr1.add("Masha");
+        listStr1.add("Misha");
+        listStr1.add("Natasha");
+        List<String> listStr2 = new ArrayList<>();
+        listStr2.add("Vova");
+        listStr2.add("Dima");
+        listStr2.add("Sergy");
+        ArrayList<String> tmp=new ArrayList<>();
+        tmp.addAll(listStr1);
+        listStr1.clear();
+        listStr1.addAll(listStr2);
+        listStr2.clear();
+        listStr2.addAll(tmp);
+        tmp.clear();
+        System.out.println(listStr1);
+        System.out.println(listStr2);
+
 
 //    12. Ввести строки из файла, записать в список ArrayList. Выполнить сортировку строк,
 //    используяметод sort() из класса Collections.
