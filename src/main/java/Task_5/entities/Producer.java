@@ -1,4 +1,4 @@
-package Task_5;
+package Task_5.entities;
 
 import java.io.Serializable;
 
