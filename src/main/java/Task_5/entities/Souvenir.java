@@ -1,9 +1,13 @@
 package Task_5.entities;
 
 import java.io.Serializable;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
+
+import static Task_5.entities.Menu.in;
+import static java.lang.Double.parseDouble;
 
 public class Souvenir implements Serializable {
     private String name;
@@ -38,7 +42,7 @@ public class Souvenir implements Serializable {
         this.producer = producer;
     }
 
-    public Date getDateOfManufacture(Date dateOfManufacture) {
+    public Date getDateOfManufacture() {
         return this.dateOfManufacture;
     }
 
@@ -84,6 +88,44 @@ public class Souvenir implements Serializable {
         souvenir.setProducer(producer);
         souvenir.setDateOfManufacture(dateOfManufacture);
         souvenir.setPrice(price);
+        return souvenir;
+    }
+    public static Souvenir editSouvenir(Souvenir souvenirSearch) {
+        Souvenir souvenir=new Souvenir();
+        souvenir.setName(souvenirSearch.getName());
+        souvenir.setProducer(souvenirSearch.getProducer());
+        souvenir.setDateOfManufacture(souvenirSearch.getDateOfManufacture());
+        souvenir.setPrice(souvenirSearch.getPrice());
+        System.out.print("Enter new name: ");
+        String tmp = in.nextLine();
+        if(tmp != null && !tmp.isEmpty()) {
+            souvenir.setName(tmp);
+        }
+        System.out.print("Enter new name of producer: ");
+        tmp = in.nextLine();
+        if(tmp != null && !tmp.isEmpty()) {
+            souvenir.getProducer().setName(tmp);
+        }
+        System.out.print("Enter new country of producer: ");
+        tmp = in.nextLine();
+        if(tmp != null && !tmp.isEmpty()) {
+            souvenir.getProducer().setCountry(tmp);
+        }
+        System.out.print("Enter new date of manufacture: ");
+        tmp = in.nextLine();
+        if(tmp != null && !tmp.isEmpty()) {
+            try {
+                SimpleDateFormat dateOfManufacture = new SimpleDateFormat("yyyy-MM-dd");
+                souvenir.setDateOfManufacture(dateOfManufacture.parse(tmp));
+            } catch (ParseException e) {
+                System.out.println("Invalid date format " + tmp);
+            }
+        }
+        System.out.print("Enter new price: ");
+        tmp = in.nextLine();
+        if(tmp != null && !tmp.isEmpty()) {
+            souvenir.setPrice(parseDouble(tmp));
+        }
         return souvenir;
     }
 
