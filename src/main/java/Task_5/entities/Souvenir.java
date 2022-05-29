@@ -3,6 +3,7 @@ package Task_5.entities;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 
 public class Souvenir implements Serializable {
     private String name;
@@ -20,16 +21,6 @@ public class Souvenir implements Serializable {
         this.price = price;
     }
 
-
-    @Override
-    public String toString() {
-        return "Souvenir{" +
-                "name='" + name + '\'' +
-                ", producer=" + producer +
-                ", dateOfManufacture=" + dateOfManufacture +
-                ", price=" + price +
-                '}';
-    }
 
     public String getName() {
         return name;
@@ -62,4 +53,39 @@ public class Souvenir implements Serializable {
     public void setPrice(Double price) {
         this.price = price;
     }
+
+    @Override
+    public String toString() {
+        return "Souvenir{" +
+                "name='" + name + '\'' +
+                ", producer=" + producer +
+                ", dateOfManufacture=" + dateOfManufacture +
+                ", price=" + price +
+                '}';
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Souvenir souvenir = (Souvenir) o;
+        return Objects.equals(name, souvenir.name)
+                && Objects.equals(producer, souvenir.producer)
+                && Objects.equals(dateOfManufacture, souvenir.dateOfManufacture)
+                && Objects.equals(price, souvenir.price);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, producer, dateOfManufacture, price);
+    }
+    public static Souvenir addSouvenir(String name, Producer producer, Date dateOfManufacture, Double price) {
+        Souvenir souvenir=new Souvenir();
+        souvenir.setName(name);
+        souvenir.setProducer(producer);
+        souvenir.setDateOfManufacture(dateOfManufacture);
+        souvenir.setPrice(price);
+        return souvenir;
+    }
+
+
 }

@@ -1,6 +1,7 @@
 package Task_5.entities;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Producer implements Serializable {
     private String name;
@@ -37,5 +38,24 @@ public class Producer implements Serializable {
                 "name='" + name + '\'' +
                 ", country='" + country + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Producer producer = (Producer) o;
+        return Objects.equals(name, producer.name) && Objects.equals(country, producer.country);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, country);
+    }
+    public static Producer addProducer(String name, String country) {
+        Producer producer=new Producer();
+        producer.setName(name);
+        producer.setCountry(country);
+        return producer;
     }
 }
