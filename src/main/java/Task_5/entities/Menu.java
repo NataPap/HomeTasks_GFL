@@ -25,7 +25,8 @@ public class Menu {
                     "Adding a souvenir - 1\n" +
                     "Editing souvenir data - 2\n" +
                     "Removing a souvenir - 3\n" +
-                    "View souvenirs and producers - 4 :\n");
+                    "View souvenirs and producers - 4\n" +
+                    "Exit - 5\n");
             select = Integer.parseInt(in.nextLine());
             switch (select) {
                 case 1:
@@ -47,11 +48,14 @@ public class Menu {
                 case 4:
                     viewMenu();
                     break;
+                case 5:
+                    System.out.println("Good bay!");
+                    break;
                 default:
-                    System.out.println("Некоректний вибір");
+                    System.out.println("\"Invalid number.Please try again.\n");
                     break;
             }
-        } while (select < 1 && select > 4);
+        } while (select!=5);
     }
 
     public static Producer addProducerMenu() {
@@ -144,7 +148,9 @@ public class Menu {
                     "View producers by price - 5\n" +
                     "View producers and their souvenirs - 6\n" +
                     "View producers of a particular souvenir of a particular year - 7\n" +
-                    "View souvenirs by year - 8\n"
+                    "View souvenirs by year - 8\n" +
+                            "Exit - 9\n"
+
 
                     );
             select = Integer.parseInt(in.nextLine());
@@ -173,11 +179,13 @@ public class Menu {
                 case 8:
                     viewSouvenirByYear();
                     break;
+                case 9:
+                    break;
                 default:
-                    System.out.println("Некоректний вибір");
+                    System.out.println("\"Invalid number.Please try again.\n");
                     break;
             }
-        } while (select < 1 && select > 4);
+        } while (select !=9);
     }
 
     private static void viewAllProducers() {
