@@ -5,11 +5,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static Task_5.entities.Producer.addProducer;
 import static Task_5.entities.Souvenir.addSouvenir;
 import static Task_5.entities.Souvenir.editSouvenir;
+
 
 public class Menu {
     static Scanner in = new Scanner((System.in));
@@ -24,7 +26,7 @@ public class Menu {
                     "Adding a souvenir - 1\n" +
                     "Editing souvenir data - 2\n" +
                     "Removing a souvenir - 3\n" +
-                    "View souvenirs - 4 :\n");
+                    "View souvenirs and producers - 4 :\n");
             select = Integer.parseInt(in.nextLine());
             switch (select) {
                 case 1:
@@ -44,7 +46,7 @@ public class Menu {
                     souvenirs.writerInFile();
                     break;
                 case 4:
-                    System.out.println(souvenirs.toString());
+                    viewMenu();
                     break;
                 default:
                     System.out.println("Некоректний вибір");
@@ -130,6 +132,69 @@ public class Menu {
                     " name of souvenir - " +name+ "; name of producer - "+nameProducer);
         }
     }
+
+    public static void viewMenu (){
+        int select;
+        do {
+            System.out.print("What operations will we perform?\n" +
+                    "Choose transaction number from 1 to 4: \n" +
+                    "View all souvenirs - 1\n" +
+                    "View all producers - 2\n" +
+                    "View souvenirs by producer - 3\n" +
+                    "View souvenirs - 4 :\n");
+            select = Integer.parseInt(in.nextLine());
+            switch (select) {
+                case 1:
+                    System.out.println(souvenirs.toString());
+                    break;
+                case 2:
+
+                    break;
+                case 3:
+                    viewSouvenirsByProducer ();
+                    break;
+                case 4:
+                    souvenirsByCountry();
+                    break;
+                case 5:
+                    souvenirsByCountry();
+                    break;
+                default:
+                    System.out.println("Некоректний вибір");
+                    break;
+            }
+        } while (select < 1 && select > 4);
+    }
+
+
+
+    public static void viewSouvenirsByProducer () {
+        System.out.print("Enter name of producer: ");
+        String nameProducer = in.nextLine();
+        System.out.print("Enter country of producer: ");
+        String countryProducer = in.nextLine();
+        List<Souvenir> souvenirsByProducer = souvenirs.getSouvenirList().stream()
+                .filter(e -> e.getProducer().getName().equals(nameProducer) && e.getProducer().getCountry().equals(countryProducer))
+                .collect(Collectors.toList());
+        if(souvenirsByProducer.isEmpty()){
+            System.out.println("There are no souvenirs from the specified producer.");
+        }
+        System.out.println(souvenirsByProducer.toString());
+
+    }
+    private static void souvenirsByCountry() {
+        System.out.print("Enter country of producer: ");
+        String countryProducer = in.nextLine();
+        List<Souvenir> souvenirsByProducer = souvenirs.getSouvenirList().stream()
+                .filter(e -> e.getProducer().getCountry().equals(countryProducer))
+                .collect(Collectors.toList());
+        if(souvenirsByProducer.isEmpty()){
+            System.out.println("There are no souvenirs from the specified producer.");
+        }
+        System.out.println(souvenirsByProducer.toString());
+
+    }
+
 
 //    public Producer manufacturersChoice (String name, String country) {
 //        Producer producer=new Producer();
