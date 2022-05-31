@@ -2,9 +2,8 @@ package Task_5.entities;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Scanner;
+import java.time.Year;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -141,14 +140,20 @@ public class Menu {
                     "View all souvenirs - 1\n" +
                     "View all producers - 2\n" +
                     "View souvenirs by producer - 3\n" +
-                    "View souvenirs - 4 :\n");
+                    "View souvenirs by country - 4\n" +
+                    "View producers by price - 5\n" +
+                    "View producers and their souvenirs - 6\n" +
+                    "View producers of a particular souvenir of a particular year - 7\n" +
+                    "View souvenirs by year - 8\n"
+
+                    );
             select = Integer.parseInt(in.nextLine());
             switch (select) {
                 case 1:
                     System.out.println(souvenirs.toString());
                     break;
                 case 2:
-
+                    viewAllProducers();
                     break;
                 case 3:
                     viewSouvenirsByProducer ();
@@ -157,7 +162,16 @@ public class Menu {
                     souvenirsByCountry();
                     break;
                 case 5:
-                    souvenirsByCountry();
+                    producerByPrice();
+                    break;
+                case 6:
+                    viewProducersAndTheySouvenirs();
+                    break;
+                case 7:
+                    viewProducersOfSouvenirOfYear();
+                    break;
+                case 8:
+                    viewSouvenirByYear();
                     break;
                 default:
                     System.out.println("Некоректний вибір");
@@ -166,7 +180,16 @@ public class Menu {
         } while (select < 1 && select > 4);
     }
 
-
+    private static void viewAllProducers() {
+        List<Producer>producerList=souvenirs.getSouvenirList().stream()
+                .map(Souvenir::getProducer)
+                .distinct()
+                .collect(Collectors.toList());
+        if(producerList.isEmpty()){
+            System.out.println("null");
+        }
+        System.out.println(producerList);
+    }
 
     public static void viewSouvenirsByProducer () {
         System.out.print("Enter name of producer: ");
@@ -179,9 +202,9 @@ public class Menu {
         if(souvenirsByProducer.isEmpty()){
             System.out.println("There are no souvenirs from the specified producer.");
         }
-        System.out.println(souvenirsByProducer.toString());
-
+        System.out.println(souvenirsByProducer);
     }
+
     private static void souvenirsByCountry() {
         System.out.print("Enter country of producer: ");
         String countryProducer = in.nextLine();
@@ -191,11 +214,51 @@ public class Menu {
         if(souvenirsByProducer.isEmpty()){
             System.out.println("There are no souvenirs from the specified producer.");
         }
-        System.out.println(souvenirsByProducer.toString());
-
+        System.out.println(souvenirsByProducer);
     }
 
+    private static void producerByPrice() {
+        System.out.print("Enter name of souvenir: ");
+        String nameSouvenir = in.nextLine();
+        System.out.print("Enter maximum purchase price: ");
+        double maxPrice = Double.parseDouble(in.nextLine());
+        List<Producer> producerList = souvenirs.getSouvenirList().stream()
+                .filter(e -> e.getName().equals(nameSouvenir)&& e.getPrice()<=maxPrice)
+                .map(e->e.getProducer())
+                .distinct()
+                .collect(Collectors.toList());
+        if(producerList.isEmpty()){
+            System.out.println("There are no souvenirs from the specified producer.");
+        }
+        System.out.println(producerList);
+    }
+    private static void viewProducersAndTheySouvenirs() {
+        Map <Producer, List<Souvenir>> producerList = souvenirs.getSouvenirList().stream()
+                .collect(Collectors.groupingBy(Souvenir::getProducer));
+        System.out.println(producerList);
+    }
+    private static void viewProducersOfSouvenirOfYear() {
+        System.out.print("Enter name of souvenir: ");
+        String nameSouvenir = in.nextLine();
+        System.out.print("Enter year of manufacture: ");
+        int yearManufacture = Integer.parseInt(in.nextLine());
 
+//        List<Producer> producerList=souvenirs.getSouvenirList().stream()
+//                .filter(e->getYearFromDate(e.getDateOfManufacture());
+
+    }
+    public static int getYearFromDate(Date date) {
+        int result = -1;
+        if (date != null) {
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            result = cal.get(Calendar.YEAR);
+        }
+        return result;
+    }
+
+    private static void viewSouvenirByYear() {
+    }
 //    public Producer manufacturersChoice (String name, String country) {
 //        Producer producer=new Producer();
 //        return producer;

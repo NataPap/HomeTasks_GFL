@@ -60,9 +60,9 @@ public class Souvenir implements Serializable {
 
     @Override
     public String toString() {
-        return "Souvenir{" +
-                "name='" + name + '\'' +
-                ", producer=" + producer +
+        return "\nSouvenir {" +
+                " name='" + name + '\'' +
+                "," + producer +
                 ", dateOfManufacture=" + dateOfManufacture +
                 ", price=" + price +
                 '}';

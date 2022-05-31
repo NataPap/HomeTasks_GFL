@@ -26,8 +26,8 @@ public class Souvenirs implements Serializable {
     }
     @Override
     public String toString() {
-        return "Souvenirs{" +
-                "souvenirList=" + souvenirList +
+        return "Souvenirs {" +
+                " souvenirList = " + souvenirList +
                 '}';
     }
 

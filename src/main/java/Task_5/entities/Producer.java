@@ -34,9 +34,8 @@ public class Producer implements Serializable {
 
     @Override
     public String toString() {
-        return "Producer{" +
-                "name='" + name + '\'' +
-                ", country='" + country + '\'' +
+        return "Producer { name = '" + name + '\'' +
+                ", country = '" + country + '\'' +
                 '}';
     }
 
