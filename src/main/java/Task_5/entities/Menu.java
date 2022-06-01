@@ -104,7 +104,7 @@ public class Menu {
                 .filter(e -> e.getName().equals(name) && e.getProducer().getName().equals(nameProducer))
                 .findFirst()
                 .orElse(null);
-        if(souvenirs != null) {
+        if(souvenirSearch!=null) {
             int index = souvenirs.getSouvenirList().indexOf(souvenirSearch);
             souvenirSearch = editSouvenir(souvenirSearch);
             souvenirs.getSouvenirList().get(index).setName(souvenirSearch.getName());
@@ -118,23 +118,27 @@ public class Menu {
     }
 
     public static void removeSouvenirMenu() {
-        System.out.print("Enter name of souvenir: ");
-        String name = in.nextLine();
         System.out.print("Enter name of producer: ");
-        String nameProducer = in.nextLine();
-        Souvenir souvenirRemove = new Souvenir();
-        souvenirRemove= souvenirs.getSouvenirList().stream()
-                .filter(e -> e.getName().equals(name) && e.getProducer().getName().equals(nameProducer))
+        String name = in.nextLine();
+        System.out.print("Enter country of producer: ");
+        String countryProducer = in.nextLine();
+        Souvenir souvenirRemove=new Souvenir();
+        do{
+            souvenirRemove= souvenirs.getSouvenirList().stream()
+                .filter(e -> e.getProducer().getName().equals(name) && e.getProducer().getCountry().equals(countryProducer))
                 .findFirst()
                 .orElse(null);
-        if(souvenirRemove != null) {
-            int index = souvenirs.getSouvenirList().indexOf(souvenirRemove);
-            souvenirs.getSouvenirList().remove(index);
-        } else {
-            System.out.println("The object is missing from the database with the specified search parameters:\n" +
-                    " name of souvenir - " +name+ "; name of producer - "+nameProducer);
+            if(souvenirRemove != null) {
+                int index = souvenirs.getSouvenirList().indexOf(souvenirRemove);
+                souvenirs.getSouvenirList().remove(index);
+            } else {
+                System.out.println("The object is missing from the database with the specified search parameters:\n" +
+                    " name of souvenir - " +name+ "; name of producer - "+countryProducer);
+            }
+        } while (souvenirRemove != null);
+
         }
-    }
+
 
     public static void viewMenu (){
         int select;
