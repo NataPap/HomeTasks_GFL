@@ -3,22 +3,24 @@ package Task_5.entities;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 
+import static Task_5.entities.Menu.getCalendarFromDate;
 import static Task_5.entities.Menu.in;
 import static java.lang.Double.parseDouble;
 
 public class Souvenir implements Serializable {
     private String name;
     private Producer producer;
-    private Date dateOfManufacture;
+    private Calendar dateOfManufacture;
     private Double price;
     private static final long serialVersionUID = 2L;
     public Souvenir() {
     }
 
-    public Souvenir(String name, Producer producer, Date dateOfManufacture, Double price) {
+    public Souvenir(String name, Producer producer, Calendar dateOfManufacture, Double price) {
         this.name = name;
         this.producer = producer;
         this.dateOfManufacture = dateOfManufacture;
@@ -42,11 +44,11 @@ public class Souvenir implements Serializable {
         this.producer = producer;
     }
 
-    public Date getDateOfManufacture() {
+    public Calendar getDateOfManufacture() {
         return this.dateOfManufacture;
     }
 
-    public void setDateOfManufacture(Date dateOfManufacture) {
+    public void setDateOfManufacture(Calendar dateOfManufacture) {
         this.dateOfManufacture = dateOfManufacture;
     }
 
@@ -60,13 +62,15 @@ public class Souvenir implements Serializable {
 
     @Override
     public String toString() {
-        return "\nSouvenir {" +
-                " name='" + name + '\'' +
-                "," + producer +
+        return "\nSouvenir{" +
+                "name='" + name + '\'' +
+                ", producer=" + producer +
                 ", dateOfManufacture=" + dateOfManufacture +
                 ", price=" + price +
-                '}';
+                "} \n";
+
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -82,7 +86,7 @@ public class Souvenir implements Serializable {
     public int hashCode() {
         return Objects.hash(name, producer, dateOfManufacture, price);
     }
-    public static Souvenir addSouvenir(String name, Producer producer, Date dateOfManufacture, Double price) {
+    public static Souvenir addSouvenir(String name, Producer producer, Calendar dateOfManufacture, Double price) {
         Souvenir souvenir=new Souvenir();
         souvenir.setName(name);
         souvenir.setProducer(producer);
@@ -116,7 +120,13 @@ public class Souvenir implements Serializable {
         if(tmp != null && !tmp.isEmpty()) {
             try {
                 SimpleDateFormat dateOfManufacture = new SimpleDateFormat("yyyy-MM-dd");
-                souvenir.setDateOfManufacture(dateOfManufacture.parse(tmp));
+                Date dateManufactures = dateOfManufacture.parse(tmp);
+                Calendar dateProd=getCalendarFromDate(dateManufactures);
+                souvenir.setDateOfManufacture(dateProd);
+
+
+
+                dateProd=getCalendarFromDate(dateManufactures);
             } catch (ParseException e) {
                 System.out.println("Invalid date format " + tmp);
             }
@@ -128,6 +138,7 @@ public class Souvenir implements Serializable {
         }
         return souvenir;
     }
+
 
 
 }

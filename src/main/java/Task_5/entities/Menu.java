@@ -75,6 +75,7 @@ public class Menu {
         Date dateManufactures = new Date();
         Producer producer = new Producer();
         Double price;
+        Calendar dateProd=new GregorianCalendar();
         System.out.println();
         System.out.print("Enter name of souvenir: ");
         name = in.nextLine();
@@ -85,12 +86,13 @@ public class Menu {
         try {
             SimpleDateFormat dateOfManufacture = new SimpleDateFormat("yyyy-MM-dd");
             dateManufactures = dateOfManufacture.parse(date);
+            dateProd=getCalendarFromDate(dateManufactures);
         } catch (ParseException e) {
             System.out.println("Invalid date format " + date);
         }
         System.out.print("Enter price: ");
         price = Double.parseDouble(in.nextLine());
-        Souvenir newSouvenir = addSouvenir(name, producer, dateManufactures, price);
+        Souvenir newSouvenir = addSouvenir(name, producer, dateProd, price);
         return newSouvenir;
     }
 
@@ -240,7 +242,7 @@ public class Menu {
                 .distinct()
                 .collect(Collectors.toList());
         if(producerList.isEmpty()){
-            System.out.println("There are no souvenirs from the specified producer.");
+            System.out.println("There are no producers.");
         }
         System.out.println(producerList);
     }
@@ -255,25 +257,29 @@ public class Menu {
         System.out.print("Enter year of manufacture: ");
         int yearManufacture = Integer.parseInt(in.nextLine());
 
-//        List<Producer> producerList=souvenirs.getSouvenirList().stream()
-//                .filter(e->getYearFromDate(e.getDateOfManufacture());
-
-    }
-    public static int getYearFromDate(Date date) {
-        int result = -1;
-        if (date != null) {
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(date);
-            result = cal.get(Calendar.YEAR);
+        List<Producer> producerList=souvenirs.getSouvenirList().stream()
+               .filter(e->e.getDateOfManufacture().get(Calendar.YEAR)==yearManufacture && e.getName().equals(nameSouvenir))
+                .map(e->e.getProducer())
+                .distinct()
+                .collect(Collectors.toList());;
+        if(producerList.isEmpty()){
+            System.out.println("There are no producers.");
         }
-        return result;
+        System.out.println(producerList);
+    }
+    public static Calendar getCalendarFromDate(Date date) {
+        Calendar cal = null;
+        if (date != null) {
+            cal = Calendar.getInstance();
+            cal.setTime(date);
+        }
+        return cal;
     }
 
     private static void viewSouvenirByYear() {
+        Map <Integer, List<Souvenir>> yearList = souvenirs.getSouvenirList().stream()
+                .collect(Collectors.groupingBy(e->e.getDateOfManufacture().get(Calendar.YEAR)));
+        System.out.println(yearList);
     }
-//    public Producer manufacturersChoice (String name, String country) {
-//        Producer producer=new Producer();
-//        return producer;
-//    }
 
 }
