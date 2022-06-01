@@ -1,8 +1,13 @@
 package Task_5.entities;
 
+import javafx.util.converter.LocalDateTimeStringConverter;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Year;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -21,7 +26,7 @@ public class Menu {
         int select;
         do {
             System.out.print("Welcome to the souvenir base. What operations will we perform?\n" +
-                    "Choose transaction number from 1 to 4: \n" +
+                    "Choose transaction number from 1 to 5: \n" +
                     "Adding a souvenir - 1\n" +
                     "Editing souvenir data - 2\n" +
                     "Removing a souvenir - 3\n" +
@@ -72,10 +77,8 @@ public class Menu {
 
     public static Souvenir addSouvenirMenu() {
         String name, date;
-        Date dateManufactures = new Date();
         Producer producer = new Producer();
         Double price;
-        Calendar dateProd=new GregorianCalendar();
         System.out.println();
         System.out.print("Enter name of souvenir: ");
         name = in.nextLine();
@@ -83,16 +86,10 @@ public class Menu {
         producer = addProducerMenu();
         System.out.print("Enter date of manufacture in the format \"yyyy-MM-dd\": ");
         date = in.nextLine();
-        try {
-            SimpleDateFormat dateOfManufacture = new SimpleDateFormat("yyyy-MM-dd");
-            dateManufactures = dateOfManufacture.parse(date);
-            dateProd=getCalendarFromDate(dateManufactures);
-        } catch (ParseException e) {
-            System.out.println("Invalid date format " + date);
-        }
+        LocalDate dateTime = LocalDate.parse(date);
         System.out.print("Enter price: ");
         price = Double.parseDouble(in.nextLine());
-        Souvenir newSouvenir = addSouvenir(name, producer, dateProd, price);
+        Souvenir newSouvenir = addSouvenir(name, producer, dateTime, price);
         return newSouvenir;
     }
 
@@ -146,7 +143,7 @@ public class Menu {
         int select;
         do {
             System.out.print("What operations will we perform?\n" +
-                    "Choose transaction number from 1 to 4: \n" +
+                    "Choose transaction number from 1 to 9: \n" +
                     "View all souvenirs - 1\n" +
                     "View all producers - 2\n" +
                     "View souvenirs by producer - 3\n" +
@@ -258,7 +255,7 @@ public class Menu {
         int yearManufacture = Integer.parseInt(in.nextLine());
 
         List<Producer> producerList=souvenirs.getSouvenirList().stream()
-               .filter(e->e.getDateOfManufacture().get(Calendar.YEAR)==yearManufacture && e.getName().equals(nameSouvenir))
+               .filter(e->e.getDateOfManufacture().getYear()==yearManufacture && e.getName().equals(nameSouvenir))
                 .map(e->e.getProducer())
                 .distinct()
                 .collect(Collectors.toList());;
@@ -267,18 +264,10 @@ public class Menu {
         }
         System.out.println(producerList);
     }
-    public static Calendar getCalendarFromDate(Date date) {
-        Calendar cal = null;
-        if (date != null) {
-            cal = Calendar.getInstance();
-            cal.setTime(date);
-        }
-        return cal;
-    }
 
     private static void viewSouvenirByYear() {
         Map <Integer, List<Souvenir>> yearList = souvenirs.getSouvenirList().stream()
-                .collect(Collectors.groupingBy(e->e.getDateOfManufacture().get(Calendar.YEAR)));
+                .collect(Collectors.groupingBy(e->e.getDateOfManufacture().getYear()));
         System.out.println(yearList);
     }
 
